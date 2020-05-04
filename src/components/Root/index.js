@@ -14,9 +14,8 @@ class Root extends React.Component {
     render() {
         return (
             <div className="child-class">
-                I`m a child!
                 <div>
-                    <Link to="/one">One</Link>
+                    <Link to="/one">Page</Link>
                     <br/>
                     <Link to="/">Home</Link>
                 </div>

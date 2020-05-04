@@ -7,7 +7,6 @@ import Root from "./components/Root";
 const App = () => (
     <BrowserRouter>
         <div className="root">
-            <p>Привет!@@123@!!</p>
             <Root />
         </div>
     </BrowserRouter>

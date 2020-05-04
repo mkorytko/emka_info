@@ -1,7 +1,5 @@
 require("dotenv").config();
 
-console.log(require("dotenv").config());
-
 const express = require("express");
 const http = require("http");
 const path = require("path");
@@ -20,4 +18,5 @@ app.get("/*", (req, res) => {
 });
 
 const server = http.Server(app);
+
 server.listen(process.env.PORT, () => console.log(`Listen on ${process.env.PORT}`));
