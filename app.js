@@ -1,22 +1,42 @@
 require("dotenv").config();
+const env = process.env;
 
 const express = require("express");
-const http = require("http");
-const path = require("path");
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
-const history = require("connect-history-api-fallback")
-
-
 const app = express();
 
-app.use(express.static("public_html"));
-app.use(express.static("public"));
+// const cookieParser = require("cookie-parser");
+// const logger = require("morgan");
 
-app.get("/*", (req, res) => {
-    res.sendFile(path.resolve("./public_html/index.html"));
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+app.use(express.static("./public_html"));
+app.use("/assets", express.static("./public"));
+
+// PATTERN
+// const hbs = require("hbs");
+// app.set("view engine", "hbs");
+
+// SESSION
+const session = require("./session");
+app.use(session);
+
+const passport = require("./middleware/passport");
+app.use(passport.initialize());
+app.use(passport.session());
+
+const routes = require("./routes");
+
+app.use("/", routes);
+
+const server = require("http").createServer(app);
+const io = require('socket.io')(server);
+io.on('connection', (socket) => {
+    console.log('a user connected');
+    socket.on("disconnect", () => {
+        console.log('Socket disconnected');
+    })
 });
 
-const server = http.Server(app);
-
-server.listen(process.env.PORT, () => console.log(`Listen on ${process.env.PORT}`));
+server.listen(env.DB_PORT, () => console.log(`Listen ${env.DB_PORT}`));
