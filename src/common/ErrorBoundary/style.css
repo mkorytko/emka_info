@@ -1,0 +1,19 @@
+.boundary-error-wrapper {
+    color: red;
+    font-family: "Gilroy";
+}
+.boundary-error-wrapper__title {
+    text-align: center;
+    border-bottom: 2px solid red;
+}
+.boundary-error-wrapper__msg {
+    width: 220px;
+    margin: auto;
+}
+.boundary-error-wrapper__type {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: mediumvioletred;
+    text-decoration: underline;
+}
